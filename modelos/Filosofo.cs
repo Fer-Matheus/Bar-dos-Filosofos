@@ -29,7 +29,7 @@ class Filosofo
 
             int precisa = Random.Shared.Next(1, GarrafasPossiveis.Count);
             List<int> garrasfasConseguidas = [];
-            Console.WriteLine($"O filósofo {Id} precisa de {precisa} garrafas");
+            Console.WriteLine($"Filósofo {Id} precisa de {precisa} garrafas");
             
             int i = 0;
 
