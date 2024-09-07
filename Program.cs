@@ -1,56 +1,15 @@
-﻿int[,] matrixAdjacencia = 
-{
-        { 0, 1, 0, 0, 1 },
-        { 1, 0, 1, 0, 0 },
-        { 0, 1, 0, 1, 0 },
-        { 0, 0, 1, 0, 1 },
-        { 1, 0, 0, 1, 0 }
-};
-
-int[,] matrixAdjacencia2 = 
-{
-{0, 1, 0, 0, 0, 1,},
-{1, 0, 1, 0, 0, 0,},
-{0, 1, 0, 1, 0, 1,},
-{0, 0, 1, 0, 1, 1,},
-{0, 0, 0, 1, 0, 1,},
-{1, 0, 1, 1, 1, 0,}
-};
-
-int[,] matrixAdjacencia3 = 
-{
-    { 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    { 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    { 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
-    { 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0},
-    { 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0},
-    { 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0},
-    { 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0},
-    { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    { 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1},
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0}
-};
-
-List<(int, int[,])> datas = [
-    (6, matrixAdjacencia),
-    (6, matrixAdjacencia2),
-    (3, matrixAdjacencia3),
-];
-
-var data = datas[2];
-int qtdeBeber = data.Item1;
-int[,] matrix = data.Item2;
+﻿var data = Matriz.ParseFileToMatriz("grafos/G3.txt");
+var qtdeBeber = data.Item1;
+var matriz = data.Item2;
 
 // Estoque guarda as garrafas disponiveis
-Estoque estoque = new(matrix);
+Estoque estoque = new(matriz);
 
 // Preparando os filosofos para serem executados em paralelo
 List<Task> filosofos = [];
-for (int i = 0; i < matrix.GetLength(0); i++)
+for (int i = 0; i < matriz.GetLength(0); i++)
 {
-    var filosofo = new Filosofo(i, qtdeBeber, ref matrix);
+    var filosofo = new Filosofo(i, qtdeBeber, ref matriz);
     filosofos.Add(Task.Run(() => filosofo.Beber(estoque.Garrafas)));
 }
 
