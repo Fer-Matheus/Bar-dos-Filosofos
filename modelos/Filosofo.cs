@@ -27,7 +27,7 @@ class Filosofo
         {
             Console.WriteLine($"Filósofo {Id} está com sede.");
 
-            int precisa = Random.Shared.Next(1, GarrafasPossiveis.Count);
+            int precisa = Random.Shared.Next(1, GarrafasPossiveis.Count+1);
             List<int> garrasfasConseguidas = [];
             Console.WriteLine($"Filósofo {Id} precisa de {precisa} garrafas");
             
@@ -42,7 +42,6 @@ class Filosofo
                     Console.WriteLine($"Filósofo {Id} pegou a garrafa [{Id},{garrafaId}].");
                     garrasfasConseguidas.Add(garrafaId);  // Se conseguiu, adiciona à lista de garrafas adquiridas
                     i++;
-                    Thread.Sleep(1000);
                 }
                 else
                 {
