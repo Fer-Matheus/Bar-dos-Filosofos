@@ -3,7 +3,7 @@
     Email: fernandes.matheus@aluno.uece.br
     Disciplina: Programação Paralela e Concorrente
 
-## Como rodar o projeto?
+## Como rodar o projeto:
 
 Para executar este projeto você precisará do dotnet 8 ou maior. Essa é o único requisito para rodar o projeto.
 
