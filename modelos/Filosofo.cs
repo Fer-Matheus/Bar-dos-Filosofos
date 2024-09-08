@@ -59,11 +59,7 @@ class Filosofo
                 }
 
                 // Libera as garrafas (Mutex)
-                foreach (var garrafaId in garrasfasConseguidas)
-                {
-                    garrafas[Id, garrafaId].ReleaseMutex();
-                    Console.WriteLine($"Filósofo {Id} liberou a garrafa [{Id},{garrafaId}].");
-                }
+                LiberarGarrafas(garrafas, garrasfasConseguidas);
 
                 DrinksFaltantes--;
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
@@ -73,17 +69,24 @@ class Filosofo
             {
                 // Se não conseguiu pegar todas as garrafas, libera as que já pegou
                 Console.WriteLine($"Filósofo {Id} não conseguiu todas as garrafas. Liberando as garrafas adquiridas.");
-                foreach (var bottleId in garrasfasConseguidas)
-                {
-                    garrafas[Id, bottleId].ReleaseMutex();
-                    Console.WriteLine($"Filósofo {Id} liberou a garrafa [{Id},{bottleId}].");
-                }
+                LiberarGarrafas(garrafas, garrasfasConseguidas);
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 Pensando();  // Retorna para o estado Pensando antes de tentar novamente
             }
         }
         stopwatch.Stop();
+        Console.WriteLine("\n######################################################################");
         Console.WriteLine($"Filósofo {Id} terminou de beber e demorou {stopwatch.Elapsed.Seconds} segundos para finalizar.");
+        Console.WriteLine("########################################################################\n");
+    }
+
+    private void LiberarGarrafas(Mutex[,] garrafas, List<int> garrasfasConseguidas)
+    {
+        foreach (var garrafaId in garrasfasConseguidas)
+        {
+            garrafas[Id, garrafaId].ReleaseMutex();
+            Console.WriteLine($"Filósofo {Id} liberou a garrafa [{Id},{garrafaId}].");
+        }
     }
 
     private List<int> PegarGarrafasPossiveis(ref int[,] matrixAdjacencia)
