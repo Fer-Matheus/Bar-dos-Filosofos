@@ -1,4 +1,4 @@
-﻿var data = Matriz.ParseFileToMatriz("grafos/G3.txt");
+﻿var data = Matriz.ParseFileToMatriz("grafos/" + args[0] + ".txt");
 var qtdeBeber = data.Item1;
 var matriz = data.Item2;
 
